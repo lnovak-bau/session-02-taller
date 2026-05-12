@@ -17,7 +17,7 @@ function App() {
   const [path, setPath] = useState(getInitialPath)
   const [token, setToken] = useState(() => sessionStorage.getItem(TOKEN_KEY) ?? '')
   const [username, setUsername] = useState('')
-  const [form, setForm] = useState({ username: 'admin', password: 'admin123' })
+  const [form, setForm] = useState({ username: '', password: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
