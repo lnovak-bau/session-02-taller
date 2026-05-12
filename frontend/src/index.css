@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+
 :root {
   font-family: 'Inter', sans-serif;
   color: #0f172a;
@@ -16,6 +18,9 @@
   --radius-16: 16px;
   --spacing-base: 12px;
   --gap: 8px;
+  --motion-fast: 160ms;
+  --motion-base: 200ms;
+  --motion-ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 * {
@@ -27,6 +32,20 @@ body {
   min-height: 100vh;
   background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.5), rgba(203, 213, 225, 0.3));
   color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -20% -10%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(44% 40% at 20% 25%, rgba(224, 231, 255, 0.45), transparent 75%),
+    radial-gradient(46% 44% at 82% 78%, rgba(203, 213, 225, 0.34), transparent 75%);
+  filter: blur(24px);
+  animation: ambient-drift 14s ease-in-out infinite alternate;
 }
 
 .page-shell {
@@ -59,6 +78,29 @@ body {
   padding: 18px;
   display: grid;
   gap: 12px;
+  animation: panel-enter var(--motion-base) var(--motion-ease) both;
+}
+
+.glass-panel > * {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: content-enter var(--motion-base) var(--motion-ease) both;
+}
+
+.glass-panel > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.glass-panel > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.glass-panel > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.glass-panel > *:nth-child(4) {
+  animation-delay: 160ms;
 }
 
 .panel-header {
@@ -109,6 +151,9 @@ input {
   font-size: 16px;
   color: var(--text-primary);
   background: white;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--motion-ease);
 }
 
 input:focus,
@@ -126,11 +171,16 @@ button {
   cursor: pointer;
   font-size: 14px;
   line-height: 20px;
-  transition: color 160ms ease;
+  transition:
+    color var(--motion-fast) ease,
+    transform var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--motion-ease);
 }
 
 button:hover {
   color: var(--secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.14);
 }
 
 button:disabled {
@@ -140,4 +190,40 @@ button:disabled {
 
 .message.error {
   color: #b91c1c;
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes content-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ambient-drift {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(1.5%, 1%, 0) scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
