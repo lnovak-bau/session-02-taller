@@ -1,0 +1,143 @@
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #0f172a;
+  background: #fafafa;
+  --primary: #0f172a;
+  --secondary: #e0e7ff;
+  --tertiary: #64748b;
+  --neutral: #f1f5f9;
+  --background: #fafafa;
+  --surface: #f8f9fa;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border: #f1f5f9;
+  --accent: #0f172a;
+  --radius-15: 15px;
+  --radius-16: 16px;
+  --spacing-base: 12px;
+  --gap: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.5), rgba(203, 213, 225, 0.3));
+  color: var(--text-primary);
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 64px 12px;
+  display: grid;
+  place-items: center;
+}
+
+.glass-frame {
+  width: min(100%, 620px);
+  border-radius: var(--radius-16);
+  padding: 1px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.5), rgba(203, 213, 225, 0.3));
+}
+
+.glass-panel {
+  border-radius: var(--radius-15);
+  background: color-mix(in srgb, var(--surface) 82%, white 18%);
+  border: 0.8px solid var(--border);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    rgba(0, 0, 0, 0.04) 0 0 0 1px inset,
+    rgba(0, 0, 0, 0.06) 0 0 0 1px,
+    rgba(0, 0, 0, 0.06) 0 1px 1px -0.5px,
+    rgba(0, 0, 0, 0.06) 0 3px 3px -1.5px,
+    rgba(0, 0, 0, 0.06) 0 6px 6px -3px,
+    rgba(0, 0, 0, 0.06) 0 12px 12px -6px,
+    rgba(0, 0, 0, 0.06) 0 24px 24px -12px;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.panel-header {
+  display: grid;
+  gap: 8px;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 60px;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+}
+
+.panel-description,
+.message,
+label {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-secondary);
+}
+
+.auth-form,
+.welcome-view {
+  display: grid;
+  gap: 12px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+input {
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 16px;
+  color: var(--text-primary);
+  background: white;
+}
+
+input:focus,
+button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+button {
+  border: 0;
+  border-radius: 4px;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  transition: color 160ms ease;
+}
+
+button:hover {
+  color: var(--secondary);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.message.error {
+  color: #b91c1c;
+}
