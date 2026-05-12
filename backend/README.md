@@ -45,6 +45,9 @@ La aplicación expone tres endpoints:
 # Clonar el repositorio y entrar a la carpeta
 cd backend
 
+# (Opcional) Exportar clave secreta segura
+export SECRET_KEY=$(openssl rand -hex 32)
+
 # Instalar dependencias
 poetry install
 
@@ -65,6 +68,8 @@ El servidor estará disponible en <http://localhost:8000>.
 
 ```bash
 cd backend
+# Opcional: exportar una clave secreta segura
+export SECRET_KEY=$(openssl rand -hex 32)
 docker-compose up --build
 ```
 
@@ -73,7 +78,9 @@ docker-compose up --build
 ```bash
 cd backend
 docker build -t jwt-backend .
-docker run -p 8000:8000 jwt-backend
+docker run -p 8000:8000 \
+  -e SECRET_KEY=$(openssl rand -hex 32) \
+  jwt-backend
 ```
 
 El servidor estará disponible en <http://localhost:8000>.
